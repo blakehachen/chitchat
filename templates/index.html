@@ -1,0 +1,39 @@
+{{ define "content" }}
+<p class="lead"><a href="/thread/new">Start a thread</a> or join one below!</p>
+
+{{ range .Threads }}
+
+<div class="card">
+  <form action="/thread/like" method="post">
+    <div class="card-header">
+      <span class="lead"> <i class="fa fa-comment">{{.Topic}}</i></span>
+    </div>
+    <div class="card-body">
+      Started by {{ .Author }} - {{ .CreatedAtDate }} - {{ .NumReplies }} posts
+      -
+      <button
+        style="
+          border: none;
+          outline: none;
+          background: none;
+          cursor: pointer;
+          color: #288fca;
+          padding: 0;
+          text-decoration: none;
+          font-family: inherit;
+          font-size: inherit;
+        "
+        type="submit"
+        name="uuid"
+        value="{{.Uuid}}"
+      >
+        <i class="fa fa-thumbs-up"></i> {{.Likes}}
+      </button>
+    </div>
+    <div class="text-right p-2">
+      <a class="link" href="/thread/read?id={{.Uuid}}">Read More</a>
+    </div>
+  </form>
+</div>
+
+{{ end }} {{ end }}

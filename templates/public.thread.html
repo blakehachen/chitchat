@@ -1,0 +1,21 @@
+{{ define "content" }}
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">{{ .Topic }}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">
+      Started by {{ .User.Name }} - {{ .CreatedAtDate }}
+    </h6>
+  </div>
+</div>
+
+{{ range .Posts }}
+<div class="card">
+  <div class="card-body">
+    <p class="card-text">{{ .Body }}</p>
+    <div class="text-right mt-2 text-muted">
+      {{ .User.Name }} - {{ .CreatedAtDate }}
+    </div>
+  </div>
+</div>
+{{ end }} {{ end }}

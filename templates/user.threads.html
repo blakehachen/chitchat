@@ -1,0 +1,14 @@
+{{ define "details" }} {{ range .Threads }}
+<div class="card">
+  <div class="card-header">
+    <span class="lead"> <i class="fa fa-comment">{{.Topic}}</i></span>
+  </div>
+  <div class="card-body">
+    Started by {{ .Author }} - {{ .CreatedAtDate }} - {{ .NumReplies }} posts -
+    Likes: {{.Likes}}
+  </div>
+  <div class="text-right p-2">
+    <a class="link" href="/thread/read?id={{.Uuid}}">Read More</a>
+  </div>
+</div>
+{{ end }} {{ end }}

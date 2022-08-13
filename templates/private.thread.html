@@ -1,0 +1,64 @@
+{{ define "content" }}
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">{{ .Thread.Topic }}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">
+      Started by {{ .ThreadUser.Name }} - {{ .ThreadCreatedAtDate }} - Likes:
+      {{.Thread.Likes}}
+    </h6>
+  </div>
+</div>
+
+{{ range .Posts }}
+<div class="card">
+  <form role="form" action="/thread/likepost" method="post">
+    <div class="card-body">
+      <p class="card-text">{{ .Body }}</p>
+      <div class="text-right mt-2 text-muted">
+        {{ .User.Name }} - {{ .CreatedAtDate }} -
+        <button
+          style="
+            border: none;
+            outline: none;
+            background: none;
+            cursor: pointer;
+            color: #288fca;
+            padding: 0;
+            text-decoration: none;
+            font-family: inherit;
+            font-size: inherit;
+          "
+          type="submit"
+          name="uuid"
+          value="{{.Uuid}}"
+        >
+          <i class="fa fa-thumbs-up"></i> {{.Likes}}
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+{{ end }}
+
+<div class="card">
+  <div class="card-body">
+    <form role="form" action="/thread/post" method="post">
+      <div class="form-group">
+        <textarea
+          required
+          class="form-control"
+          name="body"
+          id="body"
+          placeholder="Write your post here"
+          rows="3"
+        ></textarea>
+        <input type="hidden" name="uuid" value="{{ .Thread.Uuid }}" />
+        <br />
+        <button class="btn btn-primary float-right" type="submit">Post</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{{ end }}
